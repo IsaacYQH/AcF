@@ -1,8 +1,6 @@
 source("dnmMLE_funs_CHN.R")
-# start=c(b0=-0.050,b1=0.96,b2=0.051,b3=7,g0=0.1,g1=0.89,g2=0.33,g3=8,mu=mu_0)
 grid = seq(1,10,4)
 
-# start=c(b0=-0.050,b1=0.96,b2=0.051,b3=7,g0=-0.068,g1=0.89,g2=0.33,g3=5.33,mu=-0.069)
 # constraints: A*theta + B > 0
 A = matrix(c(rep(0,1),1,rep(0,11),
              rep(0,2),1,rep(0,10),
@@ -90,6 +88,9 @@ if (i == 100) {message("Standard errors are unavailable")}
 message("Check positive-definiteness (show eigenvalues):")
 eigen(r0$hessian)$values
 
-plot(sigma_gen_CHN(r0$estimate[1:6],Q,limit10,limit20,sigma_1),type = "l")
-plot(alpha_gen_CHN(r0$estimate[7:12],Q,limit10,limit20,alpha_1),type = "l")
-a = alpha_gen_CHN(r0$estimate[7:12],Q,limit10,limit20,alpha_1)
+plot(sigma_gen_CHN(r0$estimate[1:6],Q,limit10,limit20,sigma_1),
+     type = "l", main = "sigma for AcF China")
+abline(sigma_1)
+plot(alpha_gen_CHN(r0$estimate[7:12],Q,limit10,limit20,alpha_1),
+     type = "l", main = "sigma for AcF China")
+abline(alpha_1)
